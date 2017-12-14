@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zs.dao.SimManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.zs.entity.SimManager" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="STANO" property="stano" jdbcType="VARCHAR" />
+    <result column="STANO_MAN" property="stanoMan" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="SIM_NUMBER" property="simNumber" jdbcType="VARCHAR" />
+    <result column="CREATE_MAN" property="createMan" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="IS_HISTORY" property="isHistory" jdbcType="DECIMAL" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, STANO, STANO_MAN, PHONE, SIM_NUMBER, CREATE_MAN, CREATE_TIME, UPDATE_TIME, IS_HISTORY, 
+    STATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zs.entity.SimManagerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SIM_MANAGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SIM_MANAGER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SIM_MANAGER
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zs.entity.SimManagerExample" >
+    delete from SIM_MANAGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zs.entity.SimManager" >
+    insert into SIM_MANAGER (ID, STANO, STANO_MAN, 
+      PHONE, SIM_NUMBER, CREATE_MAN, 
+      CREATE_TIME, UPDATE_TIME, IS_HISTORY, 
+      STATE)
+    values (#{id,jdbcType=DECIMAL}, #{stano,jdbcType=VARCHAR}, #{stanoMan,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{simNumber,jdbcType=VARCHAR}, #{createMan,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isHistory,jdbcType=DECIMAL}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zs.entity.SimManager" >
+    insert into SIM_MANAGER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="stano != null" >
+        STANO,
+      </if>
+      <if test="stanoMan != null" >
+        STANO_MAN,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="simNumber != null" >
+        SIM_NUMBER,
+      </if>
+      <if test="createMan != null" >
+        CREATE_MAN,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="isHistory != null" >
+        IS_HISTORY,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="stano != null" >
+        #{stano,jdbcType=VARCHAR},
+      </if>
+      <if test="stanoMan != null" >
+        #{stanoMan,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="simNumber != null" >
+        #{simNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createMan != null" >
+        #{createMan,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isHistory != null" >
+        #{isHistory,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zs.entity.SimManagerExample" resultType="java.lang.Integer" >
+    select count(*) from SIM_MANAGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SIM_MANAGER
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stano != null" >
+        STANO = #{record.stano,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stanoMan != null" >
+        STANO_MAN = #{record.stanoMan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.simNumber != null" >
+        SIM_NUMBER = #{record.simNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createMan != null" >
+        CREATE_MAN = #{record.createMan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isHistory != null" >
+        IS_HISTORY = #{record.isHistory,jdbcType=DECIMAL},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SIM_MANAGER
+    set ID = #{record.id,jdbcType=DECIMAL},
+      STANO = #{record.stano,jdbcType=VARCHAR},
+      STANO_MAN = #{record.stanoMan,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      SIM_NUMBER = #{record.simNumber,jdbcType=VARCHAR},
+      CREATE_MAN = #{record.createMan,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      IS_HISTORY = #{record.isHistory,jdbcType=DECIMAL},
+      STATE = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zs.entity.SimManager" >
+    update SIM_MANAGER
+    <set >
+      <if test="stano != null" >
+        STANO = #{stano,jdbcType=VARCHAR},
+      </if>
+      <if test="stanoMan != null" >
+        STANO_MAN = #{stanoMan,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="simNumber != null" >
+        SIM_NUMBER = #{simNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createMan != null" >
+        CREATE_MAN = #{createMan,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isHistory != null" >
+        IS_HISTORY = #{isHistory,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zs.entity.SimManager" >
+    update SIM_MANAGER
+    set STANO = #{stano,jdbcType=VARCHAR},
+      STANO_MAN = #{stanoMan,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      SIM_NUMBER = #{simNumber,jdbcType=VARCHAR},
+      CREATE_MAN = #{createMan,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      IS_HISTORY = #{isHistory,jdbcType=DECIMAL},
+      STATE = #{state,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+   <select id="queryFenye" resultMap="BaseResultMap" parameterType="com.zs.entity.other.EasyUIAccept">
+  	select * from
+  	(
+	  	select t1.*,rownum rn from
+	  	(
+		  	select a1.id id,a1.stano stano,a1.stano_man stano_man,a1.phone phone,
+			a1.sim_number sim_number,a2.name create_man,a1.create_time create_time,
+			a1.update_time update_time,a1.is_history is_history,a1.state state 
+			from sim_manager a1,it_common_user.users a2
+			  	<where>
+			  		a1.create_man = a2.id
+			  		<if test="str1!=null and str1!=''">
+			  			and a1.STANO = #{str1}
+			  		</if>
+			  		<if test="str2!=null and str2!=''">
+			  			and a1.SIM_NUMBER = #{str2}
+			  		</if>
+			  		<if test="str3!=null and str3!=''">
+			  			and a1.PHONE = #{str3}
+			  		</if>
+			  		<if test="int1!=null and int1!=''">
+			  			and a1.IS_HISTORY = 0 and a1.STATE != '注销'
+			  		</if>
+			  		<if test="date1!=null">
+			  			and a1.create_time >= #{date1}
+			  		</if>
+			  		<if test="date2!=null">
+			  			and a1.create_time &lt;= #{date2}
+			  		</if>
+			  		<if test="str5!=null and str5!=''">
+			  			and a1.state = #{str5}
+			  		</if>
+			  		<if test="str4!=null and str4!=''">
+			  			and a2.name like '%${str4}%'
+			  		</if>
+			  	</where>
+			  	<if test="sort!=null and order!=null and sort!='' and order!=''">
+			  		order by a1.${sort} ${order},a1.CREATE_TIME desc
+			  	</if>
+			  	<if test="sort==null or order==null or sort=='' or order==''">
+			  		order by a1.CREATE_TIME desc
+			  	</if>
+	  	) t1
+	  	<where>
+	  		<if test="end!=null">
+	  			rownum &lt;= #{end}
+		  	</if>
+	  	</where>
+  	)
+  	<where>
+  		<if test="start!=null">
+  			rn > #{start}
+	  	</if>
+  	</where>
+  </select>
+  <select id="getCount" resultType="int" parameterType="com.zs.entity.other.EasyUIAccept">
+  	select count(*)	from sim_manager a1,it_common_user.users a2
+	  	<where>
+	  		a1.create_man = a2.id
+	  		<if test="str1!=null and str1!=''">
+	  			and a1.STANO = #{str1}
+	  		</if>
+	  		<if test="str2!=null and str2!=''">
+	  			and a1.SIM_NUMBER = #{str2}
+	  		</if>
+	  		<if test="str3!=null and str3!=''">
+	  			and a1.PHONE = #{str3}
+	  		</if>
+	  		<if test="int1!=null and int1!=''">
+	  			and a1.IS_HISTORY = 0 and a1.STATE != '注销'
+	  		</if>
+	  		<if test="date1!=null">
+	  			and a1.create_time >= #{date1}
+	  		</if>
+	  		<if test="date2!=null">
+	  			and a1.create_time &lt;= #{date2}
+	  		</if>
+	  		<if test="str5!=null and str5!=''">
+	  			and a1.state = #{str5}
+	  		</if>
+	  		<if test="str4!=null and str4!=''">
+	  			and a2.name like '%${str4}%'
+	  		</if>
+	  	</where>
+  </select>
+</mapper>

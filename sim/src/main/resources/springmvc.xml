@@ -113,8 +113,8 @@
 	
 	<!-- API 接口跨域配置 -->
 	<!-- 
+	 -->
 	<mvc:cors>  
 	    <mvc:mapping path="/api/**"/>
 	</mvc:cors>
-	 -->
 </beans>
